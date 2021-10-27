@@ -1,49 +1,104 @@
 import { FunctionComponent } from 'react';
-import { FlexBox } from 'activate-components';
-import { useQuery } from 'react-query';
-import eventsApi from 'api/events';
-import { QueryKey } from 'components/providers/Query';
-import { LoadingScreen, NoConnectionScreen } from 'components/experience/Screens';
-import EventsGrid from 'components/experience/EventsGrid';
-import LeftSideTitle from './LeftSideTitle';
-import RightSideTitle from './RightSideTitle';
+import {
+  FlexBox,
+  LinkButton,
+  Paragraph,
+  Title,
+} from 'activate-components';
+import {
+  ManWithChart,
+  TeamSuccess,
+  WomanWithMegaphone,
+} from 'components/illustations';
 
 const LandingPage: FunctionComponent = () => {
-  const {
-    isLoading,
-    data: response,
-    error,
-  } = useQuery(QueryKey.FETCH_TOP_EVENTS, eventsApi.listTopEvents);
-
-  if (isLoading) {
-    return (
-      <FlexBox width="100%" direction="column" align="center">
-        <LoadingScreen padding="48px" />
-      </FlexBox>
-    );
-  }
-
-  if (!!error) {
-    return (
-      <FlexBox width="100%" direction="column" align="center">
-        <NoConnectionScreen
-          padding="48px"
-          message="We could not load the events"
-        />
-      </FlexBox>
-    );
-  }
-
-  const events = response.data;
-
-  const items = [
-    <LeftSideTitle key="left-side-title" />,
-    <RightSideTitle key="right-side-title" />,
-    ...events,
-  ];
-
   return (
-    <EventsGrid events={items} />
+    <>
+      <FlexBox data-el="promote" align="center" width={1200} margin="0 auto 48px">
+        <FlexBox direction="column" align="flex-start" padding="24px 76px 0 0">
+          <Title
+            level={1}
+            color="brand"
+            weight="bold"
+            size={80}
+            mB
+          >
+            Promote your events
+          </Title>
+          <Paragraph>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa.
+            Tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce.
+          </Paragraph>
+          <LinkButton
+            to="/sign"
+            label="Get Started"
+            variant="fill"
+            color="brand"
+            padding="18px 24px"
+            mT
+          />
+        </FlexBox>
+        <WomanWithMegaphone width={500} color="BRAND" />
+      </FlexBox>
+      <FlexBox data-el="team" align="center" width={1200} margin="0 auto 48px">
+        <TeamSuccess width={500} color="ACCENT" />
+        <FlexBox direction="column" align="flex-start" padding="24px 0 0 76px">
+          <Title
+            level={1}
+            color="accent"
+            weight="bold"
+            size={80}
+            mB
+          >
+            Build your team
+          </Title>
+          <Paragraph>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa.
+            Tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce.
+          </Paragraph>
+          <LinkButton
+            to="/sign"
+            label="Get Started"
+            variant="fill"
+            color="accent"
+            padding="18px 24px"
+            mT
+          />
+        </FlexBox>
+      </FlexBox>
+      <FlexBox data-el="stats" align="center" width={1200} margin="0 auto 48px">
+        <FlexBox direction="column" align="flex-start" padding="0 76px 0 0">
+          <Title
+            level={1}
+            color="brand"
+            weight="bold"
+            size={80}
+            mB
+          >
+            See how you perform
+          </Title>
+          <Paragraph>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa.
+            Tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce.
+          </Paragraph>
+          <LinkButton
+            to="/sign"
+            label="Get Started"
+            variant="fill"
+            color="brand"
+            padding="18px 24px"
+            mT
+          />
+        </FlexBox>
+        <ManWithChart width={500} color="BRAND" />
+      </FlexBox>
+    </>
   );
 };
 

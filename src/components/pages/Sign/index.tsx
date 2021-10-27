@@ -14,7 +14,6 @@ import {
   Title,
   useAppLayout
 } from 'activate-components';
-import Slider from './Slider';
 import ActionBox from './ActionBox';
 import useSignPageState, { SignAction, validationRules } from './state';
 import { Content, OAuthBox, SignBox } from './styled';
@@ -43,7 +42,6 @@ const SignPage: FunctionComponent = () => {
 
   return (
     <Content layout={layout}>
-      <Slider />
       <SignBox layout={layout}>
         <FlexBox direction="column" align="stretch" mB>
           <RenderIf condition={layout !== Layout.MOBILE}>

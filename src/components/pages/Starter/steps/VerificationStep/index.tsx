@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Button, Field, Form, NumberInput } from 'activate-components';
 import { Content, Step, StepTitle } from '../../styled';
-import Illustration from '../Illustration';
 import { CodeBox, Message, ResendCodeButton } from './styled';
 import useVerificationState, { codeRules } from './state';
 
@@ -66,7 +65,6 @@ const VerificationStep: FunctionComponent<Props> = (props) => {
           />
         </CodeBox>
       </Content>
-      <Illustration step={1} />
     </Step>
   );
 };
