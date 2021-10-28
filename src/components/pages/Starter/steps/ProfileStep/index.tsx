@@ -13,7 +13,6 @@ import {
 } from 'activate-components';
 import { LoadingScreen } from 'components/experience/Screens';
 import { Content, Step, StepTitle } from '../../styled';
-import Illustration from '../Illustration';
 import {
   AvatarsBox,
   HiddenInput,
@@ -127,7 +126,6 @@ const ProfileStep: FunctionComponent<Props> = (props) => {
           </Form>
         </RenderIf>
       </Content>
-      <Illustration step={2} />
     </Step>
   );
 };

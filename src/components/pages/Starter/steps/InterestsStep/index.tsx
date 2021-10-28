@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import { Layout, RenderIf, useAppLayout } from 'activate-components';
 import InterestsGrid from 'components/experience/InterestsGrid';
 import { Content, Step, StepTitle } from '../../styled';
-import Illustration from '../Illustration';
 import { FinishButton } from './styled';
 import useInterestsState from './state';
 
@@ -52,7 +51,6 @@ const InterestsStep: FunctionComponent = () => {
           />
         </RenderIf>
       </Content>
-      <Illustration step={3} />
     </Step>
   );
 };

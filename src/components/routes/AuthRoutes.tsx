@@ -4,14 +4,7 @@ import { Layout, useAppLayout } from 'activate-components';
 import { PrivateLayout } from 'components/Layout';
 import { useAuthData } from 'components/providers/Auth';
 
-const ProfilePage = React.lazy(() => import('components/pages/Profile'));
 const DiscoverPage = React.lazy(() => import('components/pages/Discover'));
-const EventDetailsPage = React.lazy(() => import('components/pages/EventDetails'));
-const SearchPage = React.lazy(() => import('components/pages/Search'));
-const PublisherPage = React.lazy(() => import('components/pages/Publisher'));
-const UserPage = React.lazy(() => import('components/pages/User'));
-const TalksPage = React.lazy(() => import('components/pages/Talks'));
-const UpcomingPage = React.lazy(() => import('components/pages/Upcoming'));
 const SettingsPage = React.lazy(() => import('components/pages/Settings'));
 
 const PublisherModal = React.lazy(() => import('components/modals/Publisher'));
@@ -35,18 +28,10 @@ interface RouteDef {
   component: any;
 }
 
-const commonRoutes: RouteDef[] = [
-  { path: '/app/upcoming', component: UpcomingPage },
-  { path: '/app/search', component: SearchPage },
-];
+const commonRoutes: RouteDef[] = [];
 
 const routesWithPages: RouteDef[] = [
-  { path: '/app/profile', component: ProfilePage },
   { path: '/app/settings', component: SettingsPage },
-  { path: '/app/event/:eventId', component: EventDetailsPage },
-  { path: '/app/publisher/:publisherId', component: PublisherPage },
-  { path: '/app/user/:userId', component: UserPage },
-  { path: '/app/talks', component: TalksPage },
 ];
 
 const routesWithModals: RouteDef[] = [
