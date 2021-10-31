@@ -4,10 +4,12 @@ import { Layout, anyPropsAttrs } from 'activate-components';
 const contentStyleMap = {
   [Layout.DESKTOP]: css`
     display: flex;
+    justify-content: space-around;
     align-items: stretch;
   `,
   [Layout.TABLET]: css`
     display: flex;
+    align-items: center;
     flex-direction: column-reverse;
   `,
   [Layout.MOBILE]: css`
@@ -17,7 +19,7 @@ const contentStyleMap = {
 };
 
 export const Content = styled.section.attrs(anyPropsAttrs)`
-  ${({ layout }) => contentStyleMap[layout]};
+  ${({ theme: { layout } }) => contentStyleMap[layout]};
 `;
 
 const rightBlockStyleMap = {
@@ -25,13 +27,12 @@ const rightBlockStyleMap = {
     display: flex;
     flex-direction: column;
     width: 450px;
-    margin: 0 auto;
   `,
   [Layout.TABLET]: css`
     display: flex;
     flex-direction: column;
     width: 450px;
-    margin: 0 auto;
+    margin: 0 auto 48px;
   `,
   [Layout.MOBILE]: css`
     width: 100%;
@@ -42,7 +43,7 @@ const rightBlockStyleMap = {
 };
 
 export const SignBox = styled.div.attrs(anyPropsAttrs)`
-  ${({ layout }) => rightBlockStyleMap[layout]};
+  ${({ theme: { layout } }) => rightBlockStyleMap[layout]};
 `;
 
 export const OAuthBox = styled.div.attrs(anyPropsAttrs)`

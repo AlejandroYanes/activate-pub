@@ -1,37 +1,31 @@
 import React, { FunctionComponent } from 'react';
 import {
+  Button,
   Field,
-  FlexBox,
   Form,
   IconButton,
   Layout,
   LinkButton,
   PasswordInput,
   RenderIf,
-  Tab,
-  Tabset,
+  RenderInLayout,
   Text,
   Title,
-  useAppLayout
 } from 'activate-components';
-import ActionBox from './ActionBox';
-import useSignPageState, { SignAction, validationRules } from './state';
+import useSignPageState, { validationRules } from './state';
 import { Content, OAuthBox, SignBox } from './styled';
+import { MultitaskCEO } from '../../illustations';
 
 const emptyAction = () => undefined;
 
 const SignPage: FunctionComponent = () => {
-  const layout = useAppLayout();
-
   const {
     state: {
-      signAction,
       credentials,
       callingApi,
       errors,
     },
     actions: {
-      setSignAction,
       setCredentials,
       setErrors,
       authenticate,
@@ -41,28 +35,19 @@ const SignPage: FunctionComponent = () => {
   } = useSignPageState();
 
   return (
-    <Content layout={layout}>
-      <SignBox layout={layout}>
-        <FlexBox direction="column" align="stretch" mB>
-          <RenderIf condition={layout !== Layout.MOBILE}>
-            <Title
-              level={1}
-              color="brand"
-              align="center"
-              mB
-            >
-              {`${signAction} and enjoy`}
-            </Title>
-          </RenderIf>
-          <Tabset
-            activeTab={signAction}
-            onTabChange={setSignAction}
-            fullWidth
-          >
-            <Tab name={SignAction.SIGN_IN} label={SignAction.SIGN_IN} />
-            <Tab name={SignAction.SIGN_UP} label={SignAction.SIGN_UP} />
-          </Tabset>
-        </FlexBox>
+    <Content>
+      <RenderInLayout ifNot layout={Layout.MOBILE}>
+        <MultitaskCEO height={500} color="ACCENT" />
+      </RenderInLayout>
+      <SignBox>
+        <Title
+          level={1}
+          color="brand"
+          align="center"
+          mB
+        >
+          Sign In to start working
+        </Title>
         <Form
           state={credentials}
           onChange={setCredentials}
@@ -81,13 +66,15 @@ const SignPage: FunctionComponent = () => {
               {errors.signError}
             </Text>
           </RenderIf>
-          <ActionBox
-            signAction={signAction}
-            callingApi={callingApi}
+          <Button
+            label="Sign In"
+            variant="fill"
+            color="brand"
+            loading={callingApi}
             onClick={authenticate}
           />
         </Form>
-        <OAuthBox layout={layout}>
+        <OAuthBox>
           <Text color="secondary">
             Or use your social media
           </Text>
