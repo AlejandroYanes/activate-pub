@@ -38,7 +38,7 @@ const globalStyles = {
 const ThemeProvider: FunctionComponent = (props) => {
   const { children } = props;
   const { userInfo } = useAuthData();
-  const theme = userInfo?.theme || AppTheme.DuskLights;
+  const theme = userInfo?.theme || AppTheme.SummerVibes;
   const useDarkStyle = userInfo ? userInfo.useDarkStyle : false;
 
   const palette = {

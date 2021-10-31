@@ -26,7 +26,7 @@ const SendResetCodeStep: FunctionComponent<Props> = (props) => {
   return (
     <Step>
       <StepContent>
-        <StepTitle>Forgot your password?</StepTitle>
+        <StepTitle level={1}>Forgot your password?</StepTitle>
         <Message>
           Enter the email address you used to create your account.
           We will send you an email with a code to reset your password.

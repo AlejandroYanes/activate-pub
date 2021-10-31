@@ -7,7 +7,7 @@ import {
 import authApi from 'api/auth';
 import { ApiErrorType } from 'api/base';
 import { AuthCredentials } from 'models/user';
-import { SignAction, SignStateActions } from '../../reducer';
+import { SignStateActions } from '../../reducer';
 import authenticate from '../authenticate';
 
 jest.mock('activate-components', () => ({
@@ -65,7 +65,6 @@ describe('Sign page - authenticate action', () => {
       dispatchMock,
       setUserInfoMock,
       credentials,
-      SignAction.SIGN_IN,
     )();
 
     expect(dispatchMock).toHaveBeenCalledTimes(1);
@@ -98,7 +97,6 @@ describe('Sign page - authenticate action', () => {
       dispatchMock,
       setUserInfoMock,
       credentials,
-      SignAction.SIGN_IN,
     )();
 
     expect(dispatchMock).toHaveBeenCalledTimes(1);
@@ -112,9 +110,9 @@ describe('Sign page - authenticate action', () => {
     });
   });
 
-  it('should call the API to sign-up and set validation errors on fail', async () => {
+  it('should call the API to sign-in and set validation errors on fail', async () => {
     // @ts-ignore
-    authApi.signUp.mockRejectedValue({
+    authApi.signIn.mockRejectedValue({
       errorType: ApiErrorType.VALIDATION,
       validationErrors: {
         email: 'error',
@@ -131,7 +129,6 @@ describe('Sign page - authenticate action', () => {
       dispatchMock,
       setUserInfoMock,
       credentials,
-      SignAction.SIGN_UP,
     )();
 
     expect(dispatchMock).toHaveBeenCalledTimes(2);
@@ -145,13 +142,13 @@ describe('Sign page - authenticate action', () => {
         password: 'error',
       },
     });
-    expect(authApi.signUp).toHaveBeenCalled();
+    expect(authApi.signIn).toHaveBeenCalled();
     expect(setUserInfoMock).not.toHaveBeenCalled();
   });
 
-  it('should call the API to sign-up and show a notification on fail', async () => {
+  it('should call the API to sign-in and show a notification on fail', async () => {
     // @ts-ignore
-    authApi.signUp.mockRejectedValue({
+    authApi.signIn.mockRejectedValue({
       errorType: ApiErrorType.ERROR,
       errorMessage: 'error message',
     });
@@ -165,14 +162,13 @@ describe('Sign page - authenticate action', () => {
       dispatchMock,
       setUserInfoMock,
       credentials,
-      SignAction.SIGN_UP,
     )();
 
     expect(dispatchMock).toHaveBeenCalledTimes(2);
     expect(dispatchMock).toHaveBeenCalledWith({
       type: SignStateActions.START_CALLING_API,
     });
-    expect(authApi.signUp).toHaveBeenCalled();
+    expect(authApi.signIn).toHaveBeenCalled();
     expect(showNotification).toHaveBeenCalledWith({
       type: NotificationType.ERROR,
       message: 'There is been an issue trying to log you in',

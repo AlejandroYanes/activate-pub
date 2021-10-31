@@ -8,21 +8,14 @@ import authApi from 'api/auth';
 import { ApiErrorResponse, ApiErrorType } from 'api/base';
 import { AuthCredentials, UserInfo } from 'models/user';
 import { validationRules } from '../rules';
-import { SignAction, SignStateActions } from '../reducer';
+import { SignStateActions } from '../reducer';
 
 export default function authenticate(
   dispatch,
   setUserInfo,
   credentials: AuthCredentials,
-  signAction: SignAction,
 ) {
   return () => {
-    const action = (
-      signAction === SignAction.SIGN_IN
-        ? authApi.signIn
-        : authApi.signUp
-    );
-
     const { errors, hasErrors } = validateEntity(credentials, validationRules);
 
     if (hasErrors) {
@@ -54,7 +47,7 @@ export default function authenticate(
       }
     };
 
-    return action(credentials)
+    return authApi.signIn(credentials)
       .then(onSuccess)
       .catch(onError);
   }

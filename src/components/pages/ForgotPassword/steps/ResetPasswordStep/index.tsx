@@ -22,7 +22,7 @@ const ResetPasswordStep: FunctionComponent = () => {
   return (
     <Step>
       <StepContent>
-        <StepTitle>Password Reset</StepTitle>
+        <StepTitle level={1}>Password Reset</StepTitle>
         <Message>
           We sent you a 6 digit reset password code to your email.
           Please check your email and type the code here.
