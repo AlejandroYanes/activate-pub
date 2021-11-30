@@ -13,7 +13,7 @@ const endpoint = 'auth';
 
 const authApi = {
   signIn: (credentials: AuthCredentials): AxiosPromise<UserInfo> => {
-    return post(`${endpoint}/login`, credentials);
+    return post(`${endpoint}/login-pub`, credentials);
   },
   signUp: (credentials: AuthCredentials): AxiosPromise<UserInfo> => {
     return post(`${endpoint}/signup`, credentials);
