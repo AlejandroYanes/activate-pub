@@ -1,40 +1,19 @@
 import { AxiosPromise } from 'axios';
-import { EventModel } from 'models/event';
-import { get, PagedResponse } from './base';
+import { EventModel, SimpleEventDTO } from 'models/event';
+import { del, get, patch, post } from './base';
 
 const eventsApi = {
+  fetchMyEvents: (): AxiosPromise<EventModel[]> => {
+    return get('events/by-me')
+  },
   getDetails: (eventId: string): AxiosPromise<EventModel> => {
     return get(`events/${eventId}/details`);
-  },
-  listTopEvents: () : AxiosPromise<EventModel[]> => {
-    return get('events/top');
-  },
-  listMyUpcomingDates: (): AxiosPromise<PagedResponse<Date>> => {
-    return get('events/upcoming/dates');
-  },
-  listMyUpcoming: (date?: Date): AxiosPromise<PagedResponse<EventModel>> => {
-    return get('events/upcoming', {
-      params: {
-        filters: {
-          date: date ? date.toISOString() : undefined,
-        },
-      },
-    });
   },
   listPublishedBy: (publisher: string): AxiosPromise<EventModel[]> => {
     return get(`events/publishedBy/${publisher}`);
   },
   listAttendedBy: (consumer: string): AxiosPromise<EventModel[]> => {
     return get(`events/attended-by/${consumer}`);
-  },
-  discover: (date?: Date): AxiosPromise<EventModel[]> => {
-    return get('events/discover', {
-      params: {
-        filters: {
-          date: date?.toISOString(),
-        },
-      },
-    });
   },
   search: (search: string): AxiosPromise<EventModel[]> => {
     return get(`events/search/${search}`);
@@ -44,6 +23,15 @@ const eventsApi = {
   },
   unfollow: (event: string): AxiosPromise => {
     return get(`events/${event}/unfollow`);
+  },
+  create: (event: SimpleEventDTO): AxiosPromise<EventModel> => {
+    return post('events/new', event);
+  },
+  update: (id: string, event: Partial<SimpleEventDTO>): AxiosPromise<EventModel> => {
+    return patch(`events/${id}/edit`, event);
+  },
+  delete: (id: string): AxiosPromise => {
+    return del(`events/${id}`);
   }
 };
 

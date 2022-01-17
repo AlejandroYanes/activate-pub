@@ -21,3 +21,13 @@ export interface EventModel {
   followersCount?: number;
   going: boolean;
 }
+
+export interface SimpleEventDTO {
+  category: string;
+  name: string;
+  date: Date;
+  endDate?: Date;
+  isRanged?: boolean;
+  address: string;
+  isOnline?: boolean;
+}

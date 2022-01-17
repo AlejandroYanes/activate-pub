@@ -19,19 +19,15 @@ const Header: FunctionComponent = () => {
   const { pathname, search } = useLocation();
   const [activeTab, setActiveTab] = useState<string>(Menus.HOME);
 
-  const handleTabClick = useCallback((tab) => {
-    push(`${tab}`);
-  }, []);
-
   const showNotifications = useCallback(() => {
     push(search ? `${search}${Modals.UPDATES}` : Modals.UPDATES);
   }, [search]);
 
   useEffect(() => {
-    if (!tabs.includes(pathname)) {
-      setActiveTab(undefined);
-    } else {
+    if (tabs.includes(pathname)) {
       setActiveTab(pathname);
+    } else {
+      setActiveTab(undefined);
     }
   }, [pathname]);
 
@@ -43,10 +39,10 @@ const Header: FunctionComponent = () => {
         </Link>
       </FlexBox>
       <Tabset activeTab={activeTab} onTabChange={setActiveTab}>
-        <Tab name={Menus.HOME} icon="COMPASS" onClick={handleTabClick} />
-        <Tab name={Menus.SEARCH} icon="SEARCH" onClick={handleTabClick} />
-        <Tab name={Menus.BOOKED} icon="BOOKMARKS" onClick={handleTabClick} />
-        <Tab name={Menus.TALKS} icon="MESSAGE" onClick={handleTabClick} />
+        <Tab name={Menus.HOME} icon="COMPASS" onClick={push} />
+        <Tab name={Menus.SEARCH} icon="SEARCH" onClick={push} />
+        <Tab name={Menus.BOOKED} icon="BOOKMARKS" onClick={push} />
+        <Tab name={Menus.TALKS} icon="MESSAGE" onClick={push} />
       </Tabset>
       <FlexBox align="center" justify="flex-end" width={120}>
         <IconButton

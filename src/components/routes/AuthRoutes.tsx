@@ -6,6 +6,7 @@ import { useAuthData } from 'components/providers/Auth';
 
 const DiscoverPage = React.lazy(() => import('components/pages/Discover'));
 const SettingsPage = React.lazy(() => import('components/pages/Settings'));
+const NewEventPage = React.lazy(() => import('components/pages/NewEvent'));
 
 const PublisherModal = React.lazy(() => import('components/modals/Publisher'));
 const ProfileModal = React.lazy(() => import('components/modals/Profile'));
@@ -32,6 +33,7 @@ const commonRoutes: RouteDef[] = [];
 
 const routesWithPages: RouteDef[] = [
   { path: '/app/settings', component: SettingsPage },
+  { path: '/app/event/new', component: NewEventPage },
 ];
 
 const routesWithModals: RouteDef[] = [
