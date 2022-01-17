@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
-import { EventModel } from 'models/event';
-import { get } from './base';
+import { EventModel, SimpleEventDTO } from 'models/event';
+import { del, get, patch, post } from './base';
 
 const eventsApi = {
   fetchMyEvents: (): AxiosPromise<EventModel[]> => {
@@ -23,6 +23,15 @@ const eventsApi = {
   },
   unfollow: (event: string): AxiosPromise => {
     return get(`events/${event}/unfollow`);
+  },
+  create: (event: SimpleEventDTO): AxiosPromise<EventModel> => {
+    return post('events/new', event);
+  },
+  update: (id: string, event: Partial<SimpleEventDTO>): AxiosPromise<EventModel> => {
+    return patch(`events/${id}/edit`, event);
+  },
+  delete: (id: string): AxiosPromise => {
+    return del(`events/${id}`);
   }
 };
 

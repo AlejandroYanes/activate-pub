@@ -6,12 +6,10 @@ import {
   Field,
   FlexBox,
   Form,
-  Option,
-  Options,
   RenderIf,
 } from 'activate-components';
 import StepTitle from '../StepTitle';
-import useDescriptionState from './state';
+import useDescriptionState, { eventRules } from '../../state';
 
 interface Props {
   goNextStep: () => void;
@@ -33,7 +31,7 @@ const Description: FC<Props> = (props) => {
   return (
     <FlexBox direction="column" align="stretch" width={480} margin="0 auto 48px">
       <StepTitle>Description</StepTitle>
-      <Form state={data} onChange={setData} errors={errors} onError={setErrors}>
+      <Form state={data} onChange={setData} errors={errors} onError={setErrors} rules={eventRules}>
         <Field name="name" label="Name" />
         <RenderIf
           condition={data.isRanged}
@@ -47,7 +45,7 @@ const Description: FC<Props> = (props) => {
           }
         >
           <Field
-            name="startDate"
+            name="date"
             label="Start Date"
             component={DateTimePicker}
             type="date-time"
@@ -65,20 +63,14 @@ const Description: FC<Props> = (props) => {
           component={Checkbox}
           margin="0 0 32px 20px"
         />
-        {/*<Field*/}
-        {/*  name="isOnline"*/}
-        {/*  label="Is Online"*/}
-        {/*  component={Checkbox}*/}
-        {/*  margin="0 0 32px 20px"*/}
-        {/*/>*/}
-        <Field name="isOnline" component={Options}>
-          <Option value={false} label="On location" />
-        </Field>
-        <RenderIf
-          condition={!data.isOnline}
-          fallback={<Field name="link" label="Link" />}
-        >
-          <Field name="address" label="Address" />
+        <Field name="address" label={data.isOnline ? 'Link' : 'Address'} />
+        <Field
+          name="isOnline"
+          label="Is Online"
+          component={Checkbox}
+          margin="0 0 32px 20px"
+        />
+        <RenderIf condition={!data.isOnline}>
           <Field
             name="useSameAddress"
             label="Use your own address"
@@ -93,6 +85,7 @@ const Description: FC<Props> = (props) => {
           variant="fill"
           color="brand"
           label="Next"
+          padding="0 20px"
         />
       </FlexBox>
     </FlexBox>
